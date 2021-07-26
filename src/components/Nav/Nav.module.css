@@ -20,12 +20,22 @@
     display: flex;
     align-items: center;
 }
+.nav > ul, .navLinks > li {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo > h2 {
+    font-size: 3rem;
+}
 .navLinks > li, .nav > .logo {
     height: 100%;
     padding: 0 10px;
     box-sizing: border-box;
 
     cursor: pointer;
+
 }
 .navLinks > li:hover {
     color: var(--main-color);

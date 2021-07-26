@@ -8,7 +8,7 @@ export default function Nav() {
                 <h2>Logo</h2>
             </div>
             <ul className={classes.navLinks}>
-                <li>hi</li>
+                <li>Shop</li>
                 <li>Cart</li>
             </ul>
         </nav>
