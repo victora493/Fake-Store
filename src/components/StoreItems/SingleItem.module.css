@@ -1,0 +1,15 @@
+.imgContainer {
+    max-height: 150px;
+    height: 100%;
+    width: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imgContainer > img {
+    height: 100%;
+    width: auto;
+
+    object-fit: cover;
+}

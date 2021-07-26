@@ -1,0 +1,19 @@
+/* Default is light */
+section, section[dark], [dark], .dark {
+    background-color: var(--main-background);
+    color: var(--main-text-color);
+}
+section[darker], [darker], .darker {
+    background-color: var(--secondary-background);
+    color: var(--main-text-color);
+}
+section[light], [light], .light {
+    background-color: var(--tertiary-background);
+    color: var(--secondary-text-color);
+}
+
+.clamped {
+    max-width: var(--max-width-section);
+    padding: 60px var(--side-padding);
+    margin: 0 auto;
+}
