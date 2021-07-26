@@ -1,29 +1,29 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import AllItems from '../components/StoreItems/AllItems'
-import axios from 'axios'
-
-const API_URL = 'https://fakestoreapi.com/products'
+import useHttp from '../hooks/use-http'
+import { getAllProducts } from  '../lib/api'
 
 export default function MainShop() {
-    const [items, setItems] = useState([])
+    const { sendRequest, status, data, error } = useHttp(getAllProducts, true)
 
     useEffect(() => {
-        fetchData()
+        sendRequest()
     }, [])
 
-    const fetchData = async () => {
-        try {
+    let render
 
-        } catch(err) {
-            
-        }
-    }
+    // later replaced this with a loader fullscreen
+    if(status === 'pending') return render = (<h1>Loading...</h1>)
+
+    if(error) return render = (<h1>{error}</h1>)
+
+    if(status === 'completed' && data.length === 0) return render = (<h1>Sorry, there are no products</h1>)
+
+    if(status === 'completed' && data.length > 0) return render = (<AllItems items={data} />)
 
     return (
         <section>
-            <div className="clamped">
-                <AllItems items={DUMMY_ITEMS} />
-            </div>
+            {render}
         </section>
     )
 }

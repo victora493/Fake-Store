@@ -6,19 +6,25 @@
 }
 
 .imgContainer {
-    max-height: 150px;
+    max-height: 100px;
     height: 100%;
     width: auto;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    
+    object-fit: contain;
+    overflow-x: hidden;
+
+    margin-bottom: 10px;
 }
 .imgContainer > img {
     height: 100%;
     width: auto;
 
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .text {
