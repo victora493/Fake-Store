@@ -9,7 +9,7 @@ section[darker], [darker], .darker {
 }
 section[light], [light], .light {
     background-color: var(--tertiary-background);
-    color: var(--secondary-text-color);
+    color: var(--dark-text-color);
 }
 
 .clamped {

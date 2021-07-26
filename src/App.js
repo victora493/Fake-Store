@@ -1,4 +1,4 @@
-import Layout from "./UI/Layout";
+import Layout from "./components/UI/Layout";
 import MainShop from "./Pages/MainShop";
 
 function App() {

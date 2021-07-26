@@ -26,7 +26,8 @@ body {
   --tertiary-background: #ffffff;
 
   --main-text-color: #ffffff;
-  --secondary-text-color: #282c34;
+  --dark-text-color: #282c34;
+  --light-text-color: #929292;
 
   --divider-color: hsl(0, 0%, 93%);
 
