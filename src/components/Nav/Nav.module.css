@@ -26,13 +26,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    color: var(--main-text-color) !important;
+}
+li > a {
+    color: inherit;
+
+    display: flex;
+    align-items: center;
+}
+li > a:hover, .active {
+    color: var(--main-color);
+    text-decoration: none;
 }
 .logo > h2 {
     font-size: 3rem;
 }
 .navLinks > li, .nav > .logo {
     height: 100%;
-    padding: 0 10px;
+    padding-left:10px;
+    padding-right:10px;
     box-sizing: border-box;
 
     cursor: pointer;
@@ -43,4 +56,43 @@
 }
 .navLinks > li:not(:first-child) {
     margin-left: 5px;
+}
+
+.iconContainer {
+    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    box-sizing: border-box;
+    position: relative;
+}
+.iconContainer svg {
+    height: 100%;
+    width: auto;
+
+    color: inherit;
+    fill: inherit;
+}
+
+.floatingNumber {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+   
+    font-size: .9rem;
+
+    height: 23px;
+    width: 23px;
+
+    background-color: var(--main-color);
+    color: var(--secondary-background);
+    /* background-color: var(--secondary-background);
+    color: var(--main-color); */
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

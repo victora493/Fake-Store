@@ -14,6 +14,9 @@ export default function SingleItem({ item }) {
                 <p className={'small' + ' ' + classes.description}>{item.description}</p>
                 <p className={'small'}>${item.price}</p>
             </div>
+            <div className={classes.actions}>
+                <button>add item to cart</button>
+            </div>
         </Card>
     )
 }

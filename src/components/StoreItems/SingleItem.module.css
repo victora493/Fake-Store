@@ -1,8 +1,5 @@
 .card {
-    cursor: pointer;
-}
-.card:hover .title {
-    color: var(--main-color);
+    /* cursor: pointer; */
 }
 
 .imgContainer {
@@ -44,14 +41,29 @@
     display: -webkit-box;
     overflow: hidden !important;
     text-overflow: ellipsis;
+
+    color: inherit;
 }
 /* max-height: calc(line-height * number of lines you desire); */
 .title {
     max-height: calc(var(--p-line-height) * 2);
     -webkit-line-clamp: 2;
+
+    cursor: pointer;
+}
+.title:hover {
+    color: var(--main-color);
 }
 .description {
     color: var(--light-text-color);
     max-height: calc(var(--p-line-height) * 2);
     -webkit-line-clamp: 2;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 20px;
 }

@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react'
 import AllItems from '../components/StoreItems/AllItems'
+import Loader from '../components/UI/Loader'
+
 import useHttp from '../hooks/use-http'
 import { getAllProducts } from  '../lib/api'
 
@@ -13,7 +15,7 @@ export default function MainShop() {
     let render
 
     // later replaced this with a loader fullscreen
-    if(status === 'pending') return render = (<h1>Loading...</h1>)
+    if(status === 'pending') return render = (<Loader />)
 
     if(error) return render = (<h1>{error}</h1>)
 

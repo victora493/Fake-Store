@@ -17,3 +17,28 @@ section[light], [light], .light {
     padding: 60px var(--side-padding);
     margin: 0 auto;
 }
+
+button {
+    display: inline-block;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    background-color: var(--main-color);
+    color: var(--dark-text-color);
+    padding: 10px 25px;
+    white-space: nowrap;
+    transition: background-color 0.2s ease-out;
+    -webkit-transition: background-color 0.2s ease-out;
+    -moz-transition: background-color 0.2s ease-out;
+
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    text-transform: capitalize;
+}
+button:hover, button:active {
+    background-color: var(--main-color-darker);
+}
