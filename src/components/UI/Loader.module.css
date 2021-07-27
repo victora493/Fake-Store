@@ -1,0 +1,18 @@
+.container {
+    height: 100%;
+    height: calc(100vh - var(--nav-height));
+    margin-top: var(--nav-height);
+    width: 100%;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0px 5%;
+}
+.container svg {
+    height: 16rem;
+    width: auto;
+}

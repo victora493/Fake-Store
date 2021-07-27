@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import Card from '../UI/Card'
 import classes from './SingleItem.module.css'
-import Truncate from 'react-truncate';
 
 export default function SingleItem({ item }) {
     return (
@@ -10,7 +11,11 @@ export default function SingleItem({ item }) {
                 <img src={item.image} alt="item-img" />
             </div>
             <div className={classes.text}>
-                <p className={'small' + ' ' + classes.title}>{item.title}</p>
+                <p className={'small' + ' ' + classes.title}>
+                    <Link to={`/product/${item.id}`}>
+                        {item.title}
+                    </Link>
+                </p>
                 <p className={'small' + ' ' + classes.description}>{item.description}</p>
                 <p className={'small'}>${item.price}</p>
             </div>
