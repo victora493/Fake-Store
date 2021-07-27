@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from '../UI/Card'
 import classes from './SingleItem.module.css'
+import Truncate from 'react-truncate';
 
 export default function SingleItem({ item }) {
     return (

@@ -32,17 +32,26 @@
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 44px 22px;
+    grid-template-rows: calc(var(--p-line-height) * 2) calc(var(--p-line-height) * 2);
     gap: 10px;
 }
-.title {
+.title, .description {    
     font-weight: 600;
+
+    overflow:hidden;
+    -webkit-box-orient: vertical;
+    display: block;
+    display: -webkit-box;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+/* max-height: calc(line-height * number of lines you desire); */
+.title {
+    max-height: calc(var(--p-line-height) * 2);
+    -webkit-line-clamp: 2;
 }
 .description {
     color: var(--light-text-color);
-    /* height: 150px;
-    width: auto; */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    max-height: calc(var(--p-line-height) * 2);
+    -webkit-line-clamp: 2;
 }
