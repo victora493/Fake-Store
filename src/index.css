@@ -22,7 +22,7 @@ body {
 }
 
 :root {
-  --main-color: #60d9fb;
+  --main-color: hsl(193, 95%, 68%);
   --main-color-darker: hsl(193, 95%, 48%);
 
   --main-background: #282c34;
@@ -33,7 +33,7 @@ body {
   --dark-text-color: #282c34;
   --light-text-color: #929292;
 
-  --divider-color: hsl(0, 0%, 93%);
+  --divider-color: hsl(0, 0%, 73%);
 
   --nav-height: 60px;
   --max-width-section: 1220px;
@@ -42,8 +42,8 @@ body {
   --card-shadow: rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 3px 1px -2px, rgb(0 0 0 / 20%) 0px 1px 5px 0px;
 
   --h1-line-height: 4rem;
-  --medium-line-height: 3.5rem;
-  --p-line-height: 1.4rem;
+  --medium-line-height: 3rem;
+  --p-line-height: 1.7rem;
 }
 
 a, a:hover {

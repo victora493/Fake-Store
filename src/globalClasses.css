@@ -42,3 +42,40 @@ button {
 button:hover, button:active {
     background-color: var(--main-color-darker);
 }
+
+input {
+    padding: 0 10px;
+    height: 41px;
+
+    box-sizing: border-box;
+
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.link {
+    color: var(--main-color);
+}
+.link:hover {
+    text-decoration: underline;
+}
+
+.link.subtle {
+    color: inherit;
+}
+.link.subtle:hover {
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+
+.bold {
+    font-weight: 600;
+}

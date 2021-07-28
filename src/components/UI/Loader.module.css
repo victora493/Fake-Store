@@ -12,6 +12,12 @@
 
     padding: 0px 5%;
 }
+.container[data-section] {
+    height: auto;
+    margin-top: 0;
+
+    padding: 40px 0%;
+}
 .container svg {
     height: 16rem;
     width: auto;

@@ -21,7 +21,7 @@ export async function getSingleProduct(productId) {
     throw new Error(data.message || 'Could not fetch product.');
   }
 
-  const productsArr = [...data];
+  const productObj = {...data};
 
-  return productsArr;
+  return productObj;
 }
