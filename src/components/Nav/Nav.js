@@ -11,8 +11,6 @@ export default function Nav() {
     const [animate, setAnimate] = useState(false)
     const cartQty = useSelector(state => state.cart.totalProducts)
 
-    console.log(cartQty)
-
     useEffect(() => {
         if(isFirstLoad) {
             isFirstLoad = false
@@ -20,9 +18,7 @@ export default function Nav() {
         }
 
         setAnimate(true)
-        return () => {
-            setTimeout(() => setAnimate(false), 200)
-        }
+        setTimeout(() => setAnimate(false), 200)
     }, [cartQty])
 
     return (

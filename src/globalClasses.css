@@ -64,6 +64,7 @@ input::-webkit-inner-spin-button {
     color: var(--main-color);
 }
 .link:hover {
+    color: var(--main-color);
     text-decoration: underline;
 }
 
