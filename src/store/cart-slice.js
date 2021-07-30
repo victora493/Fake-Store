@@ -1,4 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import useNotification from '../hooks/use-notification'
+
+const { showNotification } = useNotification()
 
 const initialState = {
     products: [],

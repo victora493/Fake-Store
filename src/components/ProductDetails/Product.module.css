@@ -36,7 +36,9 @@
 
     background-color: var(--divider-color);
 }
-
+.body > *:not(:first-child) {
+    margin-top: 10px;
+}
 .actions {
     display: flex;
     align-items: center;

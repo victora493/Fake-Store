@@ -1,4 +1,5 @@
 import { Switch, Route } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast';
 
 import Layout from "./components/UI/Layout";
 import MainShop from "./Pages/MainShop";
@@ -8,6 +9,8 @@ import Cart from "./Pages/Cart";
 function App() {
   return (
     <Layout>
+      <Toaster />
+
       <Switch>
         <Route path='/cart'>
           <Cart/>

@@ -27,7 +27,7 @@
 }
 .singleItem {
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 100px 1fr;
     gap: 20px;
 }
 .productImg {
