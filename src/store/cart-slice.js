@@ -58,10 +58,6 @@ export const addProduct = (payload) => (dispatch, getState) => {
         
     const existingProduct = cart.products.find(item => item.id === payload.product.id)
     
-    console.log(cart)
-    console.log(payload)
-    console.log(existingProduct)
-    
     if(payload?.qty > 0 && payload?.qty <= 10) return dispatch(cartSlice.actions.actuallyAddProduct(payload))
 
     if(existingProduct?.quantity === 10) {
