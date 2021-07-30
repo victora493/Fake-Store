@@ -76,7 +76,10 @@ input::-webkit-inner-spin-button {
     text-decoration: none;
 }
 
-
 .bold {
     font-weight: 600;
+}
+
+.toaster {
+    font-size: 1.1rem;
 }

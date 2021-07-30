@@ -9,7 +9,9 @@ import Cart from "./Pages/Cart";
 function App() {
   return (
     <Layout>
-      <Toaster />
+      <Toaster toastOptions={{
+        className: 'toaster'
+      }} />
 
       <Switch>
         <Route path='/cart'>

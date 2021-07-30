@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { cartActions } from '../../store/cart-slice'
+import { addProduct } from '../../store/cart-slice'
 import classes from './Product.module.css'
 
 export default function Product({product}) {
@@ -10,7 +10,7 @@ export default function Product({product}) {
     const dispatch = useDispatch()
 
     const addProductToCart = () => {
-        dispatch(cartActions.addProduct({
+        dispatch(addProduct({
             product: product,
             qty: inputRef.current.value,
         }))

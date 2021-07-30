@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import useNotification from '../hooks/use-notification'
-
-const { showNotification } = useNotification()
+import { notificationActions } from './notification-slice'
 
 const initialState = {
     products: [],
@@ -21,16 +19,11 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addProduct(state, {payload}) {
+        actuallyAddProduct(state, {payload}) {
             const productObj = { ...payload.product }
             const qtyToAdd = +payload?.qty || null
 
             const existingProduct = state.products.find(item => item.id === productObj.id)
-
-            if(existingProduct?.quantity === 10) {
-                // should dispatch a notification saying the max number of items is 10
-                return
-            }
 
             if(existingProduct) {
                 // check if payload has a qty to add or add only 1
@@ -57,8 +50,27 @@ const cartSlice = createSlice({
 
             updateAdditionalValues(state)
         }
-    }
+    },
 })
+
+export const addProduct = (payload) => (dispatch, getState) => {
+    const { cart } = getState()
+        
+    const existingProduct = cart.products.find(item => item.id === payload.product.id)
+    
+    console.log(cart)
+    console.log(payload)
+    console.log(existingProduct)
+    if(existingProduct?.quantity === 10) {
+        // should dispatch a notification saying the max number of items is 10
+        dispatch(notificationActions.showNotification({
+            type: 'error',
+            message: 'Sorry, you can add only a max of 10 items per product'
+        }))
+        return
+    }
+    dispatch(cartSlice.actions.actuallyAddProduct(payload))
+}
 
 export const cartActions = cartSlice.actions
 

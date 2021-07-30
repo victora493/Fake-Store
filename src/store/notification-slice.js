@@ -23,12 +23,14 @@ const notificationSlice = createSlice({
 
             state = payload
 
+            console.log(payload)
+
             switch(payload.type) {
                 case 'success':
                     toast.success(payload?.message || 'success')
                     break
                 case 'error':
-                    toast.success(payload?.message || 'error')
+                    toast.error(payload?.message || 'error')
                     break
                 case 'promise':
                     toast.promise(payload?.promise, {

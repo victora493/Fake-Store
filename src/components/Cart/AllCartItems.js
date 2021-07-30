@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { MdAdd, MdRemove } from 'react-icons/md'
 
-import { cartActions } from '../../store/cart-slice'
+import { cartActions, addProduct } from '../../store/cart-slice'
 import Classes from './AllCartItems.module.css'
 
 export default function AllCartItems() {
@@ -18,10 +18,9 @@ export default function AllCartItems() {
         
         dispatch(cartActions.decreaseProduct(id))
     }
-    function handleIncreaseQty({ id, quantity }) {
-        if(quantity >= 10) return
+    function handleIncreaseQty({ id }) {
         
-        dispatch(cartActions.addProduct({
+        dispatch(addProduct({
             product: {id}
         }))
     }

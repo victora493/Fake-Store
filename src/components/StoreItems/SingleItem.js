@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { cartActions } from '../../store/cart-slice'
+import { addProduct } from '../../store/cart-slice'
 
 import Card from '../UI/Card'
 import classes from './SingleItem.module.css'
@@ -13,7 +13,7 @@ export default function SingleItem({ item }) {
     const onAddToCartClick = (e) => {
         e.stopPropagation()
 
-        dispatch(cartActions.addProduct({
+        dispatch(addProduct({
             product: item,
             qty: null,
         }))
