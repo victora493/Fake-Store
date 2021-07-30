@@ -61,6 +61,9 @@ export const addProduct = (payload) => (dispatch, getState) => {
     console.log(cart)
     console.log(payload)
     console.log(existingProduct)
+    
+    if(payload?.qty > 0 && payload?.qty <= 10) return dispatch(cartSlice.actions.actuallyAddProduct(payload))
+
     if(existingProduct?.quantity === 10) {
         // should dispatch a notification saying the max number of items is 10
         dispatch(notificationActions.showNotification({
