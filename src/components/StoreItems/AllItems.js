@@ -11,7 +11,7 @@ export default function AllItems({ items }) {
     }
 
     return (
-        <div className={`${classes.itemsContainer} clamped`}>
+        <div className={`${classes.itemsContainer}`}>
             {renderItem()}
         </div>
     )

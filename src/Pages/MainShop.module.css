@@ -1,0 +1,14 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2.2rem;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 3rem;
+    margin-left: calc(280px + 2.2rem);
+}
