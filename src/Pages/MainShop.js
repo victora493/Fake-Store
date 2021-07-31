@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useMemo} from 'react'
+import { useLocation } from 'react-router'
 
 import AllItems from '../components/StoreItems/AllItems'
 import Loader from '../components/UI/Loader'
@@ -8,25 +9,45 @@ import classes from './MainShop.module.css'
 import useHttp from '../hooks/use-http'
 import usePagination from '../hooks/use-pagination'
 import { getAllProducts } from  '../lib/api'
-import { perPageOptions, sortOptions } from '../util/sorting-options'
+import { perPageOptions, sortOptions, sortProducts } from '../util/sorting-options'
 
 export default function MainShop() {
-    const { sendRequest, status, data, error } = useHttp(getAllProducts, true)
-    const { paginatedData, setData, nextPage, prevPage, curPage, totalPages, setItemsPerPage } = usePagination()
+    const { sendRequest, status, data: dataFetched, error } = useHttp(getAllProducts, true)
+    const { paginatedData, setData, nextPage, prevPage, curPage, totalPages, setItemsPerPage, resetPagination } = usePagination()
 
+    const { search } = useLocation()
+
+    const queryParams = useMemo(() => new URLSearchParams(search), [search]);
+    
+    // sorting and limits per page logic
+    useEffect(() => {
+        const queryPerPage = queryParams.get('pageSize')
+        queryPerPage && setItemsPerPage(+queryPerPage)
+
+        const queryOrderBy = queryParams.get('orderBy')
+        const target = queryOrderBy?.split('-')[0]
+        const isAsc = queryOrderBy?.split('-')[1] === 'asc'
+        target && setData(products => {
+            const sortedProducts = [...sortProducts(products, isAsc, target)]
+            return sortedProducts
+        })
+
+        resetPagination()
+    }, [setData, setItemsPerPage, queryParams])
+
+    // fetches the initial data and it's returned as 'dataFetched' by useHttp hook
     useEffect(() => {
         sendRequest()
     }, [sendRequest])
 
+    // sets the data fetched to another state to manipulate it(sorting, pagination, filtering)
     useEffect(() => {
-        if(!data) return
+        if(!dataFetched) return
 
-        setData(data)
-    }, [data, setData])
+        setData(dataFetched)
+    }, [dataFetched, setData])
 
-    const renderActions = () => {
-        if(totalPages === 0) return ''
-
+    const renderPagination = () => {
         return (
             <div className={classes.actions}>
                 <button onClick={prevPage}>prev page</button>
@@ -55,7 +76,7 @@ export default function MainShop() {
                     <AllItems items={paginatedData} />
                 </div>
             </div>
-            {renderActions()}
+            {totalPages !== 0 && renderPagination()}
         </>
     )
 

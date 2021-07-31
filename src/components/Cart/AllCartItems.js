@@ -13,15 +13,21 @@ const AllCartItems = ({ formatNumber }) => {
 
     console.log(allProducts)
 
-    function handleDecreaseQty({ id, quantity }) {
+    function handleDecreaseQty({ id }) {
         
         dispatch(cartActions.decreaseProduct(id))
     }
+
     function handleIncreaseQty({ id }) {
         
         dispatch(addProduct({
             product: {id}
         }))
+    }
+
+    function handleRemoveProduct({ id }) {
+        
+        dispatch(cartActions.removeProduct(id))
     }
 
     function renderProducts() {
@@ -41,7 +47,10 @@ const AllCartItems = ({ formatNumber }) => {
                     </div>
                     <div className={classes.right}>
                         <div className={classes.title}>
-                            <p className="bold">{product.title}</p>
+                            <Link className='link subtle' to={`/product/${product.id}`}>
+                                <p className="bold">{product.title}</p>
+                            </Link>
+                            <button onClick={_ => handleRemoveProduct(product)} variant="subtle">Remove</button>
                         </div>
                         <div className={classes.body}>
                             <p>${formatNumber(product.price * product.quantity)}</p>

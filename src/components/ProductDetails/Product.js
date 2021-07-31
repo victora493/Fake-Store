@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { addProduct } from '../../store/cart-slice'
@@ -8,6 +8,8 @@ import classes from './Product.module.css'
 export default function Product({product}) {
     const inputRef = useRef()
     const dispatch = useDispatch()
+
+    const existingItem = useSelector(({ cart }) => cart.products.find(singleProduct => singleProduct.id === product.id))
 
     const addProductToCart = () => {
         dispatch(addProduct({
@@ -55,10 +57,10 @@ export default function Product({product}) {
                             min="1" 
                             max="10" 
                             step="1" 
-                            defaultValue={1} 
+                            defaultValue={existingItem?.quantity || 1} 
                             type="number" 
                         />
-                        <button type="submit">add to cart</button>
+                        <button type="submit">{existingItem ? 'replace in cart' : 'add to cart'}</button>
                     </form>
                 </div>
             </div>

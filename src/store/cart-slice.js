@@ -26,7 +26,7 @@ const cartSlice = createSlice({
             const existingProduct = state.products.find(item => item.id === productObj.id)
 
             if(existingProduct) {
-                // check if payload has a qty to add or add only 1
+                // check if payload has a qty to add or add only 1 instead
                 qtyToAdd ? existingProduct.quantity = +qtyToAdd : existingProduct.quantity++
             } else {
                 // add single product obj to cart
@@ -49,6 +49,16 @@ const cartSlice = createSlice({
             }
 
             updateAdditionalValues(state)
+        },
+        removeProduct(state, {payload}) {
+            console.log(payload)
+            const productId = payload
+
+            const existingProduct = state.products.find(item => item.id === productId)
+
+            if(!existingProduct) return state
+
+            state.products = state.products.filter(product => product.id !== productId)
         }
     },
 })

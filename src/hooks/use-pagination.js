@@ -18,15 +18,12 @@ const usePagination = (iPerPage = 6 ) => {
     }, [data, totalPages, itemsPerPage])
 
     useEffect(() => {
-        console.log('curPage:', curPage)
-        console.log('itemsPerPage:', itemsPerPage)
-        console.log('data:', data)
-
         const dataSlice = data.slice((curPage - 1) * itemsPerPage, itemsPerPage * curPage)
-
-        console.log('dataSlice:', dataSlice)
-
+        
+        
         setPaginatedData(dataSlice)
+
+        console.log('data has been paginated')
     }, [curPage, data, setPaginatedData, itemsPerPage])
 
     const nextPage = () => {
@@ -55,7 +52,11 @@ const usePagination = (iPerPage = 6 ) => {
         })
     }
 
-    return { paginatedData, setData, nextPage, prevPage, totalPages: totalPages.current, curPage, setItemsPerPage }
+    const resetPagination = () => {
+        setCurPage(1)
+    }
+
+    return { paginatedData, setData, nextPage, prevPage, totalPages: totalPages.current, curPage, setItemsPerPage, resetPagination }
 }
 
 

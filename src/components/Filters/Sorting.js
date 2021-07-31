@@ -3,17 +3,27 @@ import { useHistory, useLocation } from 'react-router'
 
 import classes from './Sorting.module.css'
 
+let hasLoaded = false
+
 export default function Sorting({ perPageOptions = [], sortOptions = [] }) {
     // selected sorting values
-    const [perPage, setPerPage] = useState(perPageOptions[0].value)
+    const [perPage, setPerPage] = useState(perPageOptions[1].value)
     const [sortOption, setSortOption] = useState(sortOptions[0].value)
 
     const history = useHistory()
-    const location = useLocation()
+    const { pathname } = useLocation()
 
     useEffect(() => {
-        console.log(location)
-    }, [perPage, sortOption])
+        if(!hasLoaded) {
+            hasLoaded = true
+            return
+        }
+
+        history.push({
+            pathname: pathname,
+            search: `pageSize=${perPage}&orderBy=${sortOption}`
+        });
+    }, [perPage, sortOption, history, pathname])
 
     return (
         <div className={classes.wrapper}>

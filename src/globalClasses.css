@@ -1,3 +1,4 @@
+/* SECTION STYLES */
 /* Default is light */
 section, section[dark], [dark], .dark {
     background-color: var(--main-background);
@@ -12,12 +13,21 @@ section[light], [light], .light {
     color: var(--dark-text-color);
 }
 
+/* UTIL STYLES */
 .clamped {
     max-width: var(--max-width-section);
     padding: 60px var(--side-padding);
     margin: 0 auto;
 }
+.bold {
+    font-weight: 600;
+}
 
+.toaster {
+    font-size: 1.1rem;
+}
+
+/* BUTTON STYLES */
 button {
     display: inline-block;
     font-size: 16px;
@@ -42,7 +52,15 @@ button {
 button:hover, button:active {
     background-color: var(--main-color-darker);
 }
+button[variant="subtle"] {
+    padding: 5px 12.5px;
+    background: transparent;
+}
+button[variant="subtle"]:hover, button[variant="subtle"]:active {
+    text-decoration: underline;
+}
 
+/* INPUT STYLES */
 input {
     padding: 0 10px;
     height: 41px;
@@ -60,6 +78,7 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+/* LINKS STYLES */
 .link {
     color: var(--main-color);
 }
@@ -74,12 +93,4 @@ input::-webkit-inner-spin-button {
 .link.subtle:hover {
     color: var(--main-color);
     text-decoration: none;
-}
-
-.bold {
-    font-weight: 600;
-}
-
-.toaster {
-    font-size: 1.1rem;
 }

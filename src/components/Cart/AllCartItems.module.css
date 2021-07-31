@@ -45,6 +45,12 @@
     object-fit: contain;
 }
 
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .body {
     overflow:hidden;
     -webkit-box-orient: vertical;
