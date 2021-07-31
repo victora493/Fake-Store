@@ -1,4 +1,3 @@
-import { classes } from 'istanbul-lib-coverage'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -6,9 +5,9 @@ import { useDispatch } from 'react-redux'
 import { MdAdd, MdRemove } from 'react-icons/md'
 
 import { cartActions, addProduct } from '../../store/cart-slice'
-import Classes from './AllCartItems.module.css'
+import classes from './AllCartItems.module.css'
 
-export default function AllCartItems() {
+const AllCartItems = ({ formatNumber }) => {
     const dispatch = useDispatch()
     const allProducts = useSelector(state => state.cart.products)
 
@@ -28,7 +27,7 @@ export default function AllCartItems() {
     function renderProducts() {
         if(allProducts.length === 0) {
             return (
-                <p className={Classes.emptyState}>
+                <p className={classes.emptyState}>
                     Sorry! you don't have any products in your cart but, you can go to <Link to="/" className="link">shop</Link> if you want to add some.
                 </p>
             )
@@ -36,19 +35,18 @@ export default function AllCartItems() {
 
         return allProducts.map(product => {
             return (
-                <div key={product.id} className={Classes.singleItem}>
-                    <div className={Classes.productImg}>
+                <div key={product.id} className={classes.singleItem}>
+                    <div className={classes.productImg}>
                         <img src={product.image} alt="product-image" />
                     </div>
-                    <div className={Classes.right}>
-                        <div className={Classes.title}>
+                    <div className={classes.right}>
+                        <div className={classes.title}>
                             <p className="bold">{product.title}</p>
                         </div>
-                        <div className={Classes.body}>
-                            <p>{product.description}</p>
-                            <p>${product.price}</p>
+                        <div className={classes.body}>
+                            <p>${formatNumber(product.price * product.quantity)}</p>
                         </div>
-                        <div className={Classes.actions}>
+                        <div className={classes.actions}>
                             <button type="button" onClick={() => handleDecreaseQty(product)}><MdRemove/></button>
                             <p>{product.quantity}</p>
                             <button type="button" onClick={() => handleIncreaseQty(product)}><MdAdd/></button>
@@ -60,10 +58,12 @@ export default function AllCartItems() {
     }
 
     return (
-        <div className={Classes.itemsWrapper}>
+        <div className={classes.itemsWrapper}>
 
             {renderProducts()}
 
         </div>
     )
 }
+
+export default AllCartItems

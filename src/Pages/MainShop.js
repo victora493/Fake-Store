@@ -21,7 +21,9 @@ export default function MainShop() {
 
     if(status === 'completed' && data.length === 0) return render = (<h1>Sorry, there are no products</h1>)
 
-    if(status === 'completed' && data.length > 0) return render = (<AllItems items={data} />)
+    if(status === 'completed' && data.length > 0) return render = (
+        <AllItems items={data} />
+    )
 
     return (
         <section>

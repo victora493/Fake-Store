@@ -1,0 +1,24 @@
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+.wrapper .row {
+    position: relative;
+}
+.topLine {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -7.5px;
+    width: 100%;
+    height: 1px;
+    background-color: var(--divider-color);
+}
+
+.actions > button {
+    width:  100%;
+}
