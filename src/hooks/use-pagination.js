@@ -1,14 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 // it works only with data loaded ahead (not optimal for big projects)
-const usePagination = (itemsPerPage = 6 ) => {
+const usePagination = (iPerPage = 6 ) => {
     const totalPages = useRef()
+    const [itemsPerPage, setItemsPerPage] = useState(1)
     const [curPage, setCurPage] = useState(1)
     const [data, setData] = useState([])
     const [paginatedData, setPaginatedData] = useState([])
 
     useEffect(() => {
+        setItemsPerPage(iPerPage)
+    }, [setItemsPerPage, iPerPage])
+
+    useEffect(() => {
         totalPages.current = Math.ceil(data.length / itemsPerPage)
+
     }, [data, totalPages, itemsPerPage])
 
     useEffect(() => {
@@ -49,7 +55,7 @@ const usePagination = (itemsPerPage = 6 ) => {
         })
     }
 
-    return { paginatedData, setData, nextPage, prevPage, totalPages: totalPages.current, curPage }
+    return { paginatedData, setData, nextPage, prevPage, totalPages: totalPages.current, curPage, setItemsPerPage }
 }
 
 

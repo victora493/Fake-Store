@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import classes from './Nav.module.css'
-import {IoCartOutline, IoCartSharp} from 'react-icons/io5'
+import {IoCartOutline} from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
 
 let isFirstLoad = true

@@ -12,7 +12,7 @@ body {
 
   font-size: clamp(1.75rem, 3vw, 2.1rem);
   color: var(--main-text-color);
-  line-height: 1.1;
+  line-height: 1.5;
   font-weight: 400;
 
   margin-top: var(--nav-height);
@@ -66,6 +66,8 @@ p, h1, h2, h3 {
     calc(1rem + var(--fluid-type-target, 3vw)),
     var(--fluid-type-max, 1.3rem)
   );
+
+  line-height: var(--p-line-height);
 }
 
 h1 {
@@ -99,7 +101,6 @@ h3 {
 p {
   max-width: 60ch;
 
-  line-height: var(--p-line-height);
   font-weight: 400;
 }
 

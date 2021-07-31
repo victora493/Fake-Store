@@ -37,7 +37,7 @@ const AllCartItems = ({ formatNumber }) => {
             return (
                 <div key={product.id} className={classes.singleItem}>
                     <div className={classes.productImg}>
-                        <img src={product.image} alt="product-image" />
+                        <img src={product.image} alt="product" />
                     </div>
                     <div className={classes.right}>
                         <div className={classes.title}>

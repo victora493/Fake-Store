@@ -39,6 +39,8 @@ const notificationSlice = createSlice({
                         error: (err) => `An error ocurred. ${err?.message?.toString() || err.toString()}` || 'Error when fetching',
                     })
                     break
+                default:
+                    toast.success(payload?.message || 'success')
             }
         }
     }

@@ -13,7 +13,7 @@ export default function ProductDetails() {
 
     useEffect(() => {
         sendRequest(productId)
-    }, [])
+    }, [sendRequest, productId])
 
     let render
 

@@ -29,11 +29,11 @@ export default function SingleItem({ item }) {
                 <img src={item.image} alt="item-img" />
             </div>
             <div className={classes.text}>
-                <p className={'small' + ' ' + classes.title}>
+                <p className={`small ${classes.title}`}>
                     
                         {item.title}
                 </p>
-                <p className={'small' + ' ' + classes.description}>{item.description}</p>
+                <p className={`small ${classes.description}`}>{item.description}</p>
                 <p className={'small'}>${item.price}</p>
             </div>
             <div className={classes.actions}>
