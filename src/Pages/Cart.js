@@ -8,7 +8,7 @@ import classes from './Cart.module.css'
 
 const formatNumber = (num) => {
     console.log(num)
-    return num.toLocaleString('en-US')
+    return num.toFixed(2).toLocaleString('en-US')
 }
 
 export default function Cart() {
