@@ -2,6 +2,8 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { addProduct } from '../../store/cart-slice'
+import { Heading, Text } from '@chakra-ui/layout'
+import { Button } from '@chakra-ui/button'
 
 import Card from '../UI/Card'
 import classes from './SingleItem.module.css'
@@ -29,15 +31,18 @@ export default function SingleItem({ item }) {
                 <img src={item.image} alt="item-img" />
             </div>
             <div className={classes.text}>
-                <p className={`small ${classes.title}`}>
-                    
-                        {item.title}
-                </p>
-                <p className={`small ${classes.description}`}>{item.description}</p>
-                <p className={'small'}>${item.price}</p>
+                <Heading as="h2" fontSize="xl" noOfLines={[1, 2]}>
+                    {item.title}
+                </Heading>
+                <Text fontSize='lg' noOfLines={[1, 2]}>
+                    {item.description}
+                </Text>
+                <Text fontSize='lg'>
+                    ${item.price}
+                </Text>
             </div>
             <div className={classes.actions}>
-                <button onClick={onAddToCartClick}>add item to cart</button>
+                <Button colorScheme="blue" onClick={onAddToCartClick}>add item to cart</Button>
             </div>
         </Card>
     )

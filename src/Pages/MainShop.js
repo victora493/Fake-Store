@@ -1,5 +1,6 @@
 import React, {useEffect, useMemo} from 'react'
 import { useLocation } from 'react-router'
+import { Heading } from '@chakra-ui/layout'
 
 import AllItems from '../components/StoreItems/AllItems'
 import Loader from '../components/UI/Loader'
@@ -18,6 +19,17 @@ export default function MainShop() {
     const { search } = useLocation()
 
     const queryParams = useMemo(() => new URLSearchParams(search), [search]);
+
+    const handleSorting = (productsFetched, isAsc = true, target = 'title') => {
+        // data is linked to paginatedData
+        setData(products => {
+            const sortedProducts = [...sortProducts(
+                productsFetched?.length > 0 ? productsFetched : products, isAsc, target
+            )]
+            console.log(sortedProducts)
+            return sortedProducts
+        })
+    }
     
     // sorting and limits per page logic
     useEffect(() => {
@@ -27,10 +39,8 @@ export default function MainShop() {
         const queryOrderBy = queryParams.get('orderBy')
         const target = queryOrderBy?.split('-')[0]
         const isAsc = queryOrderBy?.split('-')[1] === 'asc'
-        target && setData(products => {
-            const sortedProducts = [...sortProducts(products, isAsc, target)]
-            return sortedProducts
-        })
+        
+        target && handleSorting(null, isAsc, target)
 
         resetPagination()
     }, [setData, setItemsPerPage, queryParams])
@@ -40,11 +50,11 @@ export default function MainShop() {
         sendRequest()
     }, [sendRequest])
 
-    // sets the data fetched to another state to manipulate it(sorting, pagination, filtering)
+    // called when data finished fetching, sets the data fetched to another state to manipulate it(sorting, pagination, filtering)
     useEffect(() => {
         if(!dataFetched) return
 
-        setData(dataFetched)
+        handleSorting(dataFetched)
     }, [dataFetched, setData])
 
     const renderPagination = () => {
@@ -69,7 +79,7 @@ export default function MainShop() {
         <>
             <div className={classes.wrapper}>
                 <div className={classes.categoryColumn}>
-                    categories
+                    <Heading as="h3" fontSize="3xl"> categories </Heading>
                 </div>
                 <div className={classes.right}>
                     <Sorting perPageOptions={perPageOptions} sortOptions={sortOptions} />

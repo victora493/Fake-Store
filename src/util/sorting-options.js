@@ -23,8 +23,8 @@ export const perPageOptions = [
 
 export const sortOptions = [
     {
-        displayName: 'Name',
-        value: "name-asc",
+        displayName: 'Title',
+        value: "title-asc",
     },
     {
         displayName: 'Price: Ascending',
@@ -36,7 +36,7 @@ export const sortOptions = [
     },
 ]
 
-export const sortProducts = (products, ascending = true, target = 'id') => {
+export const sortProducts = (products, ascending = true, target = 'title') => {
     return products.sort((productA, productB) => {
       if (ascending) {
         return productA[target] > productB[target] ? 1 : -1;
