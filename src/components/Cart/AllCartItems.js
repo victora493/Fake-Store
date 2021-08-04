@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { MdAdd, MdRemove } from 'react-icons/md'
+import { Text } from '@chakra-ui/layout'
+import { Button } from '@chakra-ui/button'
 
 import { cartActions, addProduct } from '../../store/cart-slice'
 import classes from './AllCartItems.module.css'
@@ -33,9 +35,13 @@ const AllCartItems = ({ formatNumber }) => {
     function renderProducts() {
         if(allProducts.length === 0) {
             return (
-                <p className={classes.emptyState}>
-                    Sorry! you don't have any products in your cart but, you can go to <Link to="/" className="link">shop</Link> if you want to add some.
-                </p>
+                <Text fontSize="lg" className={classes.emptyState}>
+                    Sorry! you don't have any products in your cart but, you can go to
+                    <Button size="lg" colorScheme="blue" variant="link">
+                        <Link to="/" className="link">shop</Link> 
+                    </Button>
+                    if you want to add some.
+                </Text>
             )
         }
 
@@ -48,17 +54,17 @@ const AllCartItems = ({ formatNumber }) => {
                     <div className={classes.right}>
                         <div className={classes.title}>
                             <Link className='link subtle' to={`/product/${product.id}`}>
-                                <p className="bold">{product.title}</p>
+                                <Text fontSize="lg" className="bold">{product.title}</Text>
                             </Link>
-                            <button onClick={_ => handleRemoveProduct(product)} variant="subtle">Remove</button>
+                            <Button colorScheme="red" onClick={_ => handleRemoveProduct(product)} variant="link">Remove</Button>
                         </div>
                         <div className={classes.body}>
-                            <p>${formatNumber(product.price * product.quantity)}</p>
+                            <Text fontSize="lg" >${formatNumber(product.price * product.quantity)}</Text>
                         </div>
                         <div className={classes.actions}>
-                            <button type="button" onClick={() => handleDecreaseQty(product)}><MdRemove/></button>
-                            <p>{product.quantity}</p>
-                            <button type="button" onClick={() => handleIncreaseQty(product)}><MdAdd/></button>
+                            <Button type="Button" onClick={() => handleDecreaseQty(product)}><MdRemove/></Button>
+                            <Text fontSize="lg" >{product.quantity}</Text>
+                            <Button type="Button" onClick={() => handleIncreaseQty(product)}><MdAdd/></Button>
                         </div>
                     </div>
                 </div>

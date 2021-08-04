@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { addProduct } from '../../store/cart-slice'
@@ -9,11 +9,17 @@ import Card from '../UI/Card'
 import classes from './SingleItem.module.css'
 
 export default function SingleItem({ item }) {
+    const [isLoading, setIsLoading] = useState(false)
     const history = useHistory()
     const dispatch = useDispatch()
 
-    const onAddToCartClick = (e) => {
+    const onAddToCartClick = async (e) => {
         e.stopPropagation()
+        setIsLoading(true)
+
+        await new Promise(r => setTimeout(r, 2000));
+
+        setIsLoading(false)
 
         dispatch(addProduct({
             product: item,
@@ -42,7 +48,7 @@ export default function SingleItem({ item }) {
                 </Text>
             </div>
             <div className={classes.actions}>
-                <Button colorScheme="blue" onClick={onAddToCartClick}>add item to cart</Button>
+                <Button isLoading={isLoading} loadingText="adding to cart..." colorScheme="blue" onClick={onAddToCartClick}>add item to cart</Button>
             </div>
         </Card>
     )
