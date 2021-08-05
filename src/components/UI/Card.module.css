@@ -1,4 +1,6 @@
 .cardContainer {
     box-shadow: var(--card-shadow);
     padding: 20px;
+
+    border-radius: 4px;
 }

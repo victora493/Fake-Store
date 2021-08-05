@@ -56,7 +56,11 @@ const usePagination = (iPerPage = 6 ) => {
         setCurPage(1)
     }
 
-    return { paginatedData, setData, nextPage, prevPage, totalPages: totalPages.current, curPage, setItemsPerPage, resetPagination }
+    const handlePageChange = (page) => {
+        setCurPage(page)
+    }
+
+    return { paginatedData, setData, nextPage, prevPage, totalPages: totalPages.current, curPage, setItemsPerPage, resetPagination, handlePageChange }
 }
 
 

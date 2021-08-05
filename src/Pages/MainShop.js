@@ -5,16 +5,18 @@ import { Heading } from '@chakra-ui/layout'
 import AllItems from '../components/StoreItems/AllItems'
 import Loader from '../components/UI/Loader'
 import Sorting from '../components/Filters/Sorting'
+import Pagination from '../components/Pagination/Pagination'
 
 import classes from './MainShop.module.css'
 import useHttp from '../hooks/use-http'
 import usePagination from '../hooks/use-pagination'
 import { getAllProducts } from  '../lib/api'
 import { perPageOptions, sortOptions, sortProducts } from '../util/sorting-options'
+import { requiredChakraThemeKeys } from '@chakra-ui/react'
 
 export default function MainShop() {
     const { sendRequest, status, data: dataFetched, error } = useHttp(getAllProducts, true)
-    const { paginatedData, setData, nextPage, prevPage, curPage, totalPages, setItemsPerPage, resetPagination } = usePagination()
+    const { paginatedData, setData, nextPage, prevPage, curPage, totalPages, setItemsPerPage, resetPagination, handlePageChange } = usePagination()
 
     const { search } = useLocation()
 
@@ -59,17 +61,13 @@ export default function MainShop() {
 
     const renderPagination = () => {
         return (
-            <div className={classes.actions}>
-                <button onClick={prevPage}>prev page</button>
-                    {curPage} / {totalPages}
-                <button onClick={nextPage}>next page</button>
-            </div>
+            <Pagination handlePageChange={handlePageChange} prevPage={prevPage} nextPage={nextPage} curPage={curPage} totalPages={totalPages} />
         )
     }
 
     let render
 
-    if(status === 'pending') render = (<Loader />)
+    if(status === 'pending') return render = (<Loader />)
 
     if(error) render = (<h1>{error}</h1>)
 
