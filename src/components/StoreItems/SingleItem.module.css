@@ -14,7 +14,7 @@
     object-fit: contain;
     overflow-x: hidden;
 
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 .imgContainer > img {
     height: 100%;
@@ -28,37 +28,8 @@
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: calc(var(--p-line-height) * 2) calc(var(--p-line-height) * 2);
-    gap: 10px;
+    gap: 20px;
 }
-.title, .description {    
-    font-weight: 600;
-
-    overflow:hidden;
-    -webkit-box-orient: vertical;
-    display: block;
-    display: -webkit-box;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-
-    color: inherit;
-}
-/* max-height: calc(line-height * number of lines you desire); */
-.title {
-    max-height: calc(var(--p-line-height) * 2);
-    -webkit-line-clamp: 2;
-
-    cursor: pointer;
-}
-.title:hover {
-    color: var(--main-color);
-}
-.description {
-    color: var(--light-text-color);
-    max-height: calc(var(--p-line-height) * 2);
-    -webkit-line-clamp: 2;
-}
-
 .actions {
     display: flex;
     justify-content: center;
