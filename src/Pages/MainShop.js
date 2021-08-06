@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react'
+import React, {useEffect, useMemo, useCallback} from 'react'
 import { useLocation } from 'react-router'
 import { Heading } from '@chakra-ui/layout'
 
@@ -12,26 +12,25 @@ import useHttp from '../hooks/use-http'
 import usePagination from '../hooks/use-pagination'
 import { getAllProducts } from  '../lib/api'
 import { perPageOptions, sortOptions, sortProducts } from '../util/sorting-options'
-import { requiredChakraThemeKeys } from '@chakra-ui/react'
 
 export default function MainShop() {
     const { sendRequest, status, data: dataFetched, error } = useHttp(getAllProducts, true)
-    const { paginatedData, setData, nextPage, prevPage, curPage, totalPages, setItemsPerPage, resetPagination, handlePageChange } = usePagination()
+    const { paginatedData, setDataToPaginate, nextPage, prevPage, curPage, totalPages, setItemsPerPage, resetPagination, handlePageChange } = usePagination()
 
     const { search } = useLocation()
 
     const queryParams = useMemo(() => new URLSearchParams(search), [search]);
 
-    const handleSorting = (productsFetched, isAsc = true, target = 'title') => {
-        // data is linked to paginatedData
-        setData(products => {
+    const handleSorting = useCallback((productsFetched, isAsc = true, target = 'title') => {
+        // setDataToPaginate is linked to paginatedData
+        setDataToPaginate(products => {
             const sortedProducts = [...sortProducts(
                 productsFetched?.length > 0 ? productsFetched : products, isAsc, target
             )]
             console.log(sortedProducts)
             return sortedProducts
         })
-    }
+    }, [setDataToPaginate, sortProducts])
     
     // sorting and limits per page logic
     useEffect(() => {
@@ -45,7 +44,7 @@ export default function MainShop() {
         target && handleSorting(null, isAsc, target)
 
         resetPagination()
-    }, [setData, setItemsPerPage, queryParams])
+    }, [setDataToPaginate, setItemsPerPage, queryParams, handleSorting])
 
     // fetches the initial data and it's returned as 'dataFetched' by useHttp hook
     useEffect(() => {
@@ -57,7 +56,7 @@ export default function MainShop() {
         if(!dataFetched) return
 
         handleSorting(dataFetched)
-    }, [dataFetched, setData])
+    }, [dataFetched, setDataToPaginate])
 
     const renderPagination = () => {
         return (
@@ -89,7 +88,7 @@ export default function MainShop() {
     )
 
     return (
-        <section className='clamped'>
+        <section className='clamped-wider'>
             {render}
         </section>
     )

@@ -40,7 +40,7 @@ export default function SingleItem({ item }) {
                 <Heading as="h2" fontSize="xl" noOfLines={[1, 2]}>
                     {item.title}
                 </Heading>
-                <Text fontSize='lg' noOfLines={[1, 2]}>
+                <Text fontSize='md' noOfLines={[1, 2]}>
                     {item.description}
                 </Text>
                 <Text fontSize='lg'>

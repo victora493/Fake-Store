@@ -4,6 +4,11 @@
     padding: 60px var(--side-padding);
     margin: 0 auto;
 }
+.clamped-wider {
+    max-width: var(--max-width-main-section);
+    padding: 60px var(--side-padding);
+    margin: 0 auto;
+}
 .bold {
     font-weight: 600;
 }

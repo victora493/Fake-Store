@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 // it works only with data loaded ahead (not optimal for big projects)
 const usePagination = (iPerPage = 6 ) => {
@@ -52,6 +52,10 @@ const usePagination = (iPerPage = 6 ) => {
         })
     }
 
+    const setDataToPaginate = useCallback((dataArr) => {
+        setData(dataArr)
+    }, [setData])
+
     const resetPagination = () => {
         setCurPage(1)
     }
@@ -60,7 +64,7 @@ const usePagination = (iPerPage = 6 ) => {
         setCurPage(page)
     }
 
-    return { paginatedData, setData, nextPage, prevPage, totalPages: totalPages.current, curPage, setItemsPerPage, resetPagination, handlePageChange }
+    return { paginatedData,  setDataToPaginate, nextPage, prevPage, totalPages: totalPages.current, curPage, setItemsPerPage, resetPagination, handlePageChange }
 }
 
 

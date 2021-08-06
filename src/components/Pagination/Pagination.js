@@ -6,15 +6,9 @@ import { IconButton } from '@chakra-ui/button'
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5'
 
 export default function Pagination({ prevPage, nextPage, curPage, totalPages, handlePageChange }) {
-
-    console.log('cur page:', curPage)
-
     const renderPagesBtns = () => {
         const totalPagesArr = Array(totalPages).fill('_')
         const isSelected = (i) => (curPage ===  (i + 1))
-
-        console.log(totalPages)
-        console.log(totalPagesArr)
 
         return (
             totalPagesArr.map((_, i) => {
