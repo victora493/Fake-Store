@@ -52,10 +52,6 @@ const usePagination = (iPerPage = 6 ) => {
         })
     }
 
-    const setDataToPaginate = useCallback((dataArr) => {
-        setData(dataArr)
-    }, [setData])
-
     const resetPagination = useCallback(() => {
         setCurPage(1)
     }, [setCurPage])
@@ -64,7 +60,7 @@ const usePagination = (iPerPage = 6 ) => {
         setCurPage(page)
     }
 
-    return { paginatedData,  setDataToPaginate, nextPage, prevPage, totalPages: totalPages.current, curPage, setItemsPerPage, resetPagination, handlePageChange }
+    return { paginatedData,  setData, nextPage, prevPage, totalPages: totalPages.current, curPage, setItemsPerPage, resetPagination, handlePageChange }
 }
 
 

@@ -7,7 +7,9 @@ import classes from './Sorting.module.css'
 
 let hasLoaded = false
 
-export default function Sorting({ perPageOptions = [], sortOptions = [], defaultSort = sortOptions[0].value, defaultPerPage = perPageOptions[1].value}) {
+export default function Sorting({ perPageOptions = [], sortOptions = [], defaultSortProp, defaultPerPageProp}) {
+    const defaultSort = defaultSortProp || sortOptions[0].value
+    const defaultPerPage = defaultPerPageProp || perPageOptions[1].value
     // selected sorting values
     const [perPage, setPerPage] = useState(defaultPerPage)
     const [sortOption, setSortOption] = useState(defaultSort)
@@ -20,7 +22,9 @@ export default function Sorting({ perPageOptions = [], sortOptions = [], default
             hasLoaded = true
             return
         }
-        // todo find a way to sort by initial values even without the url params
+
+        if(!sortOption && !perPage) return
+
         history.push({
             pathname: pathname,
             search: `pageSize=${perPage}&orderBy=${sortOption}`
