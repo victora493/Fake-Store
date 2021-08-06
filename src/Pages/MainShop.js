@@ -30,7 +30,7 @@ export default function MainShop() {
             console.log(sortedProducts)
             return sortedProducts
         })
-    }, [setDataToPaginate, sortProducts])
+    }, [setDataToPaginate])
     
     // sorting and limits per page logic
     useEffect(() => {
@@ -41,10 +41,13 @@ export default function MainShop() {
         const target = queryOrderBy?.split('-')[0]
         const isAsc = queryOrderBy?.split('-')[1] === 'asc'
         
+        console.log(queryPerPage)
+        console.log(queryOrderBy)
+
         target && handleSorting(null, isAsc, target)
 
         resetPagination()
-    }, [setDataToPaginate, setItemsPerPage, queryParams, handleSorting])
+    }, [setDataToPaginate, setItemsPerPage, queryParams, handleSorting, resetPagination])
 
     // fetches the initial data and it's returned as 'dataFetched' by useHttp hook
     useEffect(() => {
