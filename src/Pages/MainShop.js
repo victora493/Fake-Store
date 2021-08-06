@@ -60,7 +60,15 @@ export default function MainShop() {
 
     const renderPagination = () => {
         return (
-            <Pagination handlePageChange={handlePageChange} prevPage={prevPage} nextPage={nextPage} curPage={curPage} totalPages={totalPages} />
+            <div className={classes.paginationContainer}>
+                <Pagination 
+                    handlePageChange={handlePageChange} 
+                    prevPage={prevPage} 
+                    nextPage={nextPage} 
+                    curPage={curPage} 
+                    totalPages={totalPages} 
+                />
+            </div>
         )
     }
 
@@ -80,6 +88,7 @@ export default function MainShop() {
                 </div>
                 <div className={classes.right}>
                     <Sorting perPageOptions={perPageOptions} sortOptions={sortOptions} />
+                    {totalPages !== 0 && renderPagination()}
                     <AllItems items={paginatedData} />
                 </div>
             </div>

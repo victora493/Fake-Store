@@ -1,10 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link as ReachLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { MdAdd, MdRemove } from 'react-icons/md'
 import { Text } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
+import { Link} from 'react-router-dom'
 
 import { cartActions, addProduct } from '../../store/cart-slice'
 import classes from './AllCartItems.module.css'
@@ -53,8 +54,8 @@ const AllCartItems = ({ formatNumber }) => {
                     </div>
                     <div className={classes.right}>
                         <div className={classes.title}>
-                            <Link className='link subtle' to={`/product/${product.id}`}>
-                                <Text fontSize="lg" className="bold">{product.title}</Text>
+                            <Link className="link" as={ReachLink} to={`/product/${product.id}`}>
+                                <Text fontSize="md">{product.title}</Text>
                             </Link>
                             <Button colorScheme="red" onClick={_ => handleRemoveProduct(product)} variant="link">Remove</Button>
                         </div>

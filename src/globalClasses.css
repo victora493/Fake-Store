@@ -16,3 +16,8 @@
 .toaster {
     font-size: 1.1rem;
 }
+
+.link:hover {
+    cursor: pointer;
+    text-decoration: underline !important;
+}

@@ -17,17 +17,19 @@ export default function Nav() {
     const { toggleColorMode, colorMode } = useColorMode()
     const [animate, setAnimate] = useState(false)
     const cartQty = useSelector(state => state.cart.totalProducts)
-
+    
     useEffect(() => {
         if(isFirstLoad) {
             isFirstLoad = false
             return
         }
-
+        
         setAnimate(true)
         setTimeout(() => setAnimate(false), 200)
     }, [cartQty])
-
+    
+    const activeLinkClass = colorMode === 'light' ? classes.activeL : classes.activeD
+    
     return (
         <nav className={classes.nav}>
             <Flex className={classes.innerNav} background={navBackground} width="100%" justifyContent="space-between">
@@ -41,12 +43,12 @@ export default function Nav() {
                         <IconButton onClick={toggleColorMode} icon={colorMode === 'light' ? <IoMdMoon/> : <IoMdSunny/>} />
                     </li>
                     <li>
-                        <NavLink to="/" exact activeClassName={classes.active}>
+                        <NavLink to="/" exact activeClassName={activeLinkClass}>
                             <Text fontSize="3xl">Shop</Text>
                         </NavLink>
                     </li>
                     <li className={classes.iconContainer}>
-                        <NavLink to="/cart" activeClassName={classes.active}>
+                        <NavLink to="/cart" activeClassName={activeLinkClass}>
                             <IoCartOutline variant="link" className={animate ? classes.animate : ''}/>
                         </NavLink>
 

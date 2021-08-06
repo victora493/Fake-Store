@@ -30,12 +30,20 @@
 
     color: var(--main-text-color) !important;
 }
+
 li > a {
     color: inherit;
 
     display: flex;
     align-items: center;
 }
+.activeL {
+    color: var(--main-color-darker);
+}
+.activeD {
+    color: var(--main-color);
+}
+
 .logo  {
     display: flex;
     align-items: center;
@@ -77,7 +85,7 @@ li > a {
     height: 23px;
     width: 23px;
 
-    background-color: var(--main-color);
+    background-color: var(--main-color-darker);
     color: var(--secondary-background);
     /* background-color: var(--secondary-background);
     color: var(--main-color); */
