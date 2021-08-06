@@ -7,10 +7,10 @@ import classes from './Sorting.module.css'
 
 let hasLoaded = false
 
-export default function Sorting({ perPageOptions = [], sortOptions = [] }) {
+export default function Sorting({ perPageOptions = [], sortOptions = [], defaultSort = sortOptions[0].value, defaultPerPage = perPageOptions[1].value}) {
     // selected sorting values
-    const [perPage, setPerPage] = useState(perPageOptions[1].value)
-    const [sortOption, setSortOption] = useState(sortOptions[0].value)
+    const [perPage, setPerPage] = useState(defaultPerPage)
+    const [sortOption, setSortOption] = useState(defaultSort)
 
     const history = useHistory()
     const { pathname } = useLocation()

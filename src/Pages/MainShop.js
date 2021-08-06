@@ -25,7 +25,8 @@ export default function MainShop() {
         // setDataToPaginate is linked to paginatedData
         setDataToPaginate(products => {
             const sortedProducts = [...sortProducts(
-                productsFetched?.length > 0 ? productsFetched : products, isAsc, target
+                productsFetched?.length > 0 ? productsFetched : products
+                , isAsc, target
             )]
             console.log(sortedProducts)
             return sortedProducts
@@ -59,7 +60,7 @@ export default function MainShop() {
         if(!dataFetched) return
 
         handleSorting(dataFetched)
-    }, [dataFetched, setDataToPaginate])
+    }, [dataFetched, setDataToPaginate, handleSorting])
 
     const renderPagination = () => {
         return (
@@ -90,7 +91,12 @@ export default function MainShop() {
                     <Heading as="h3" fontSize="3xl"> categories </Heading>
                 </div>
                 <div className={classes.right}>
-                    <Sorting perPageOptions={perPageOptions} sortOptions={sortOptions} />
+                    <Sorting 
+                        perPageOptions={perPageOptions} 
+                        sortOptions={sortOptions} 
+                        defaultSort={queryParams.get('orderBy')} 
+                        defaultPerPage={queryParams.get('pageSize')} 
+                    />
                     {totalPages !== 0 && renderPagination()}
                     <AllItems items={paginatedData} />
                 </div>
