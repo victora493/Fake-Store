@@ -1,6 +1,6 @@
-import React, {useEffect, useMemo, useCallback} from 'react'
-import { useLocation } from 'react-router'
+import React, {useEffect, useMemo} from 'react'
 import { Heading } from '@chakra-ui/layout'
+import { useLocation } from 'react-router';
 
 import AllItems from '../components/StoreItems/AllItems'
 import Loader from '../components/UI/Loader'
@@ -10,45 +10,37 @@ import Pagination from '../components/Pagination/Pagination'
 import classes from './MainShop.module.css'
 import useHttp from '../hooks/use-http'
 import usePagination from '../hooks/use-pagination'
+import useSorting from '../hooks/use-sorting'
 import { getAllProducts } from  '../lib/api'
-import { perPageOptions, sortOptions, sortProducts } from '../util/sorting-options'
+import { perPageOptions, sortOptions } from '../util/sorting-options'
 
 export default function MainShop() {
     const { sendRequest, status, data: productsFetched, error } = useHttp(getAllProducts, true)
     const { paginatedData, setData: setDataToPaginate, nextPage, prevPage, curPage, totalPages, setItemsPerPage, resetPagination, handlePageChange } = usePagination()
+    const { sortData, sortedData } = useSorting()
 
     const { search } = useLocation()
 
     const queryParams = useMemo(() => new URLSearchParams(search), [search]);
-
-    const handleSorting = useCallback((products, isAsc = true, target = 'title') => {
-        if(!products && (!paginatedData || paginatedData.length === 0)) return
-        
-        // setDataToPaginate is linked to paginatedData
-        setDataToPaginate(dataStored => {
-            const productsToSort = dataStored?.length > 0 ? dataStored : products
-
-            const sortedProducts = [...sortProducts(productsToSort, isAsc, target)]
-            console.log(sortedProducts)
-            return sortedProducts
-        })
-    }, [setDataToPaginate])
     
-    // initialize the data fetched to be sorted based on the search url or default sorts
+    // listen to page size change from url and set it
     useEffect(() => {
         const queryPerPage = queryParams.get('pageSize')
         queryPerPage && setItemsPerPage(+queryPerPage)
+    }, [setItemsPerPage, queryParams])
 
-        const queryOrderBy = queryParams.get('orderBy')
-        const target = queryOrderBy?.split('-')[0]
-        const isAsc = queryOrderBy?.split('-')[1] === 'asc'
-        
-        handleSorting(productsFetched, isAsc, target)
+    // 3.- after data was sorted, paginate it
+    useEffect(() => {
+        setDataToPaginate(sortedData)
+    }, [ setDataToPaginate, sortedData])
 
+    // 2.- after data was fetched, sort it with custom hook
+    useEffect(() => {
+        sortData(productsFetched)
         resetPagination()
-    }, [ setItemsPerPage, queryParams, handleSorting, resetPagination, productsFetched])
+    }, [productsFetched, sortData, resetPagination])
 
-    // fetches the initial data and it's returned as 'productsFetched' by useHttp hook
+    // 1.- fetches the initial data and it's returned as 'productsFetched' by useHttp hook
     useEffect(() => {
         sendRequest()
     }, [sendRequest])

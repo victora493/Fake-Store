@@ -35,15 +35,3 @@ export const sortOptions = [
         value: 'price-desc',
     },
 ]
-
-export const sortProducts = (products, ascending = true, target = 'title') => {
-    if(!products || products.length === 0) return []
-    
-    return products.sort((productA, productB) => {
-      if (ascending) {
-        return productA[target] > productB[target] ? 1 : -1;
-      } else {
-        return productA[target] < productB[target] ? 1 : -1;
-      }
-    });
-};
