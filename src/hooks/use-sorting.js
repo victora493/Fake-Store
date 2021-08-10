@@ -29,7 +29,6 @@ export default function useSorting() {
             return isPrevData  ? [...sortDataHelper(prevData, isAsc, target)] : [...sortDataHelper(data, isAsc, target)]
         })
 
-        // console.log(sortedData, target, isAsc)
     }, [sortDataHelper, setSortedData, queryParams])
 
     return { sortData, sortedData }
