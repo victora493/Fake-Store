@@ -1,27 +1,35 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
 
-import useLocalStorage from './hooks/use-local-storage';
-import { handleCartReplace } from './store/cart-slice';
+import { getCartData, storeCartData } from './store/cart-actions';
 
 import Layout from "./components/UI/Layout";
 import MainShop from "./Pages/MainShop";
 import ProductDetails from "./Pages/ProductDetails";
 import Cart from "./Pages/Cart";
 
+let timesCalled = 0
+
 function App() {
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
-  const { saveState, loadState } = useLocalStorage()
 
   useEffect(() => {
-    // replace cart in local storage from state and vice versa
-    dispatch(handleCartReplace({
-      cart, saveState, loadState
-    }))
-  }, [cart])
+    dispatch(getCartData())
+  }, [dispatch])
+
+  // it's called two times due to first default use effect call, then in the second one is because when setting the initial state to redux it triggers another call
+  // but since it's just for initialization, It's not needed
+  useEffect(() => {
+    if(timesCalled < 2) {
+      timesCalled++
+      return
+    }
+
+    dispatch(storeCartData(cart))
+  }, [cart, dispatch])
 
   return (
     <Layout>

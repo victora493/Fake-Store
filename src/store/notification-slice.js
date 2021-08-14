@@ -23,8 +23,6 @@ const notificationSlice = createSlice({
 
             state = payload
 
-            console.log(payload)
-
             switch(payload.type) {
                 case 'success':
                     toast.success(payload?.message || 'success')

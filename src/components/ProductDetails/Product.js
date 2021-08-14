@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Heading, Text } from '@chakra-ui/layout'
 import { Input, Button } from "@chakra-ui/react"
 
-import { addProduct } from '../../store/cart-slice'
+import { addProduct } from '../../store/cart-actions'
 import classes from './Product.module.css'
 
 export default function Product({product}) {

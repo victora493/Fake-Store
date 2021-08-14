@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { loadState } from '../hooks/use-local-storage'
-import { notificationActions } from './notification-slice'
 
 const initialState = {
     products: [],
@@ -20,12 +18,10 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        replaceCart(state, { payload }) {
-            console.log(state)
-            console.log('state', state)
-            console.log('payload', payload)
-
-            
+        replaceCart(state, {payload}) {
+            state.products = payload?.products || []
+            state.totalProducts = payload?.totalProducts || 0
+            state.totalPrice = payload?.totalPrice || 0
         },
         actuallyAddProduct(state, {payload}) {
             const productObj = { ...payload.product }
@@ -70,24 +66,6 @@ const cartSlice = createSlice({
         }
     },
 })
-
-export const addProduct = (payload) => (dispatch, getState) => {
-    const { cart } = getState()
-        
-    const existingProduct = cart.products.find(item => item.id === payload.product.id)
-    
-    if(payload?.qty > 0 && payload?.qty <= 10) return dispatch(cartSlice.actions.actuallyAddProduct(payload))
-
-    if(existingProduct?.quantity === 10) {
-        // should dispatch a notification saying the max number of items is 10
-        dispatch(notificationActions.showNotification({
-            type: 'error',
-            message: 'Sorry, you can add only a max of 10 items per product'
-        }))
-        return
-    }
-    dispatch(cartSlice.actions.actuallyAddProduct(payload))
-}
 
 let isFirstCall = true
 export const handleCartReplace = (payload) => async (dispatch, getState) => {

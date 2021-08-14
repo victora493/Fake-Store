@@ -7,7 +7,8 @@ import { Text } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
 import { Link} from 'react-router-dom'
 
-import { cartActions, addProduct } from '../../store/cart-slice'
+import { cartActions } from '../../store/cart-slice'
+import { addProduct } from '../../store/cart-actions'
 import classes from './AllCartItems.module.css'
 
 const AllCartItems = ({ formatNumber }) => {
