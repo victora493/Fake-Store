@@ -1,19 +1,19 @@
-export const saveState = (state, stateName) => {
+export const saveState = async (state, stateName) => {
     try {
-        const serializedState = JSON.stringify(state);
+        const serializedState = await JSON.stringify(state);
         localStorage.setItem(stateName, serializedState);
     } catch (err) {
         console.error(err)
     }
 };
   
-export const loadState = (stateName) => {
+export const loadState = async (stateName) => {
     try {
         const serializedState = localStorage.getItem(stateName);
         if (!serializedState) {
             return undefined;
         }
-        const state = JSON.parse(serializedState);
+        const state = await JSON.parse(serializedState);
         return state;
     } catch {
         return undefined;

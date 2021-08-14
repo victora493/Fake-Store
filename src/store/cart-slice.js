@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { loadState } from '../hooks/use-local-storage'
 import { notificationActions } from './notification-slice'
 
 const initialState = {
@@ -19,6 +20,13 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+        replaceCart(state, { payload }) {
+            console.log(state)
+            console.log('state', state)
+            console.log('payload', payload)
+
+            
+        },
         actuallyAddProduct(state, {payload}) {
             const productObj = { ...payload.product }
             const qtyToAdd = +payload?.qty || null
@@ -79,6 +87,21 @@ export const addProduct = (payload) => (dispatch, getState) => {
         return
     }
     dispatch(cartSlice.actions.actuallyAddProduct(payload))
+}
+
+let isFirstCall = true
+export const handleCartReplace = (payload) => async (dispatch, getState) => {
+    console.log(payload)
+    const { cart } = getState()
+
+    if(isFirstCall) {
+        const loadedCartState = await payload.loadState('cart')
+        dispatch(cartSlice.actions.replaceCart(loadedCartState))
+        isFirstCall = false
+        return
+    }
+    
+    payload.saveState(cart, 'cart')
 }
 
 export const cartActions = cartSlice.actions
