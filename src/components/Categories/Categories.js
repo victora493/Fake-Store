@@ -29,7 +29,8 @@ export default function Categories({ categories = [] }) {
             >
                 
             {categories.map((category, i) => {
-                const isSelected = search.includes(category) || (search.length === 0 && i === 0)
+                const categoryURL = queryParams.get('category')
+                const isSelected = categoryURL === category || (search.length === 0 && i === 0)
 
                 return (
                     <Link

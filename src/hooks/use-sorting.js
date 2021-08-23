@@ -18,18 +18,19 @@ export default function useSorting() {
     const { search } = useLocation()
 
     const queryParams = useMemo(() => new URLSearchParams(search), [search]);
+    const sortQuery = useMemo(() => queryParams.get('orderBy'), [queryParams])
 
-    const sortData = useCallback((data) => {
-        const queryOrderBy = queryParams.get('orderBy')
-        const target = queryOrderBy?.split('-')[0]
-        const isAsc = queryOrderBy?.split('-')[1] === 'asc'
+    const sortData = useCallback((data, isNewData = false) => {
+        const target = sortQuery?.split('-')[0]
+        const isAsc = sortQuery?.split('-')[1] === 'asc'
 
         setSortedData(prevData => {
-            const isPrevData = prevData && prevData.length > 1
-            return isPrevData  ? [...sortDataHelper(prevData, isAsc, target)] : [...sortDataHelper(data, isAsc, target)]
+            return !isNewData  ? [...sortDataHelper(prevData, isAsc, target)] : [...sortDataHelper(data, isAsc, target)]
         })
 
-    }, [sortDataHelper, setSortedData, queryParams])
+    }, [sortDataHelper, setSortedData, sortQuery])
+
+
 
     return { sortData, sortedData }
 }

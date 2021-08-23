@@ -17,6 +17,8 @@ import { perPageOptions, sortOptions } from '../util/sorting-options'
 
 export default function MainShop() {
     const [categoriesArr, setCategoriesArr] = useState([])
+    const [categorySelected, setCategorySelected] = useState('all')
+
     const { sendRequest, status, data: productsFetched, error } = useHttp(getAllProducts, true)
     const { paginatedData, setData: setDataToPaginate, nextPage, prevPage, curPage, totalPages, setItemsPerPage, resetPagination, handlePageChange } = usePagination()
     const { sortData, sortedData } = useSorting()
@@ -25,10 +27,13 @@ export default function MainShop() {
 
     const queryParams = useMemo(() => new URLSearchParams(search), [search]);
     
-    // listen to page size change from url and set it
+    // listen to page size or filter change from url and set it
     useEffect(() => {
         const queryPerPage = queryParams.get('pageSize')
         queryPerPage && setItemsPerPage(+queryPerPage)
+        
+        const queryCategoryFilter = queryParams.get('category')
+        queryCategoryFilter && setCategorySelected(queryCategoryFilter)
     }, [setItemsPerPage, queryParams])
 
     // 3.- after data was sorted, paginate it
@@ -36,19 +41,24 @@ export default function MainShop() {
         setDataToPaginate(sortedData)
     }, [ setDataToPaginate, sortedData])
 
-    // 2.- after data was fetched, sort it with custom hook and 
+    // 2.- after data was fetched, sort it with custom hook and initialized the categories
     useEffect(() => {
         if(!productsFetched || productsFetched.length === 0) return
+        console.log('category:', categorySelected)
 
-        sortData(productsFetched)
+        if(categorySelected === 'all') sortData(productsFetched, true)
+        if(categorySelected !== 'all') {
+            const filtered = productsFetched.filter(product => product.category === categorySelected)
+            sortData(filtered, true)
+        }
+
         resetPagination()
 
         if(categoriesArr?.length > 0) return
          
-        // creates and array with all categories unrepeated
-        const categories = ['all', ...new Set(productsFetched.map(product => product.category))]
-        setCategoriesArr(categories)
-    }, [productsFetched, sortData, resetPagination])
+        const categoriesUniq = ['all', ...new Set(productsFetched.map(product => product.category))]
+        setCategoriesArr(categoriesUniq)
+    }, [productsFetched, sortData, resetPagination, categorySelected])
 
     // 1.- fetches the initial data and it's returned as 'productsFetched' by useHttp hook
     useEffect(() => {
