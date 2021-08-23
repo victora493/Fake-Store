@@ -63,6 +63,7 @@ const cartSlice = createSlice({
             if(!existingProduct) return state
 
             state.products = state.products.filter(product => product.id !== productId)
+            updateAdditionalValues(state)
         }
     },
 })
