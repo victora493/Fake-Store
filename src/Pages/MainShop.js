@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import { Heading } from '@chakra-ui/layout'
 import { useLocation } from 'react-router';
 
@@ -6,6 +6,7 @@ import AllItems from '../components/StoreItems/AllItems'
 import Loader from '../components/UI/Loader'
 import Sorting from '../components/Filters/Sorting'
 import Pagination from '../components/Pagination/Pagination'
+import Categories from '../components/Categories/Categories'
 
 import classes from './MainShop.module.css'
 import useHttp from '../hooks/use-http'
@@ -15,6 +16,7 @@ import { getAllProducts } from  '../lib/api'
 import { perPageOptions, sortOptions } from '../util/sorting-options'
 
 export default function MainShop() {
+    const [categoriesArr, setCategoriesArr] = useState([])
     const { sendRequest, status, data: productsFetched, error } = useHttp(getAllProducts, true)
     const { paginatedData, setData: setDataToPaginate, nextPage, prevPage, curPage, totalPages, setItemsPerPage, resetPagination, handlePageChange } = usePagination()
     const { sortData, sortedData } = useSorting()
@@ -34,10 +36,18 @@ export default function MainShop() {
         setDataToPaginate(sortedData)
     }, [ setDataToPaginate, sortedData])
 
-    // 2.- after data was fetched, sort it with custom hook
+    // 2.- after data was fetched, sort it with custom hook and 
     useEffect(() => {
+        if(!productsFetched || productsFetched.length === 0) return
+
         sortData(productsFetched)
         resetPagination()
+
+        if(categoriesArr?.length > 0) return
+         
+        // creates and array with all categories unrepeated
+        const categories = ['all', ...new Set(productsFetched.map(product => product.category))]
+        setCategoriesArr(categories)
     }, [productsFetched, sortData, resetPagination])
 
     // 1.- fetches the initial data and it's returned as 'productsFetched' by useHttp hook
@@ -72,6 +82,7 @@ export default function MainShop() {
             <div className={classes.wrapper}>
                 <div className={classes.categoryColumn}>
                     <Heading as="h3" fontSize="3xl"> categories </Heading>
+                    <Categories categories={categoriesArr || []} />
                 </div>
                 <div className={classes.right}>
                     <Sorting 

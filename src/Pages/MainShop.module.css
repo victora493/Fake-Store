@@ -19,3 +19,7 @@
     justify-content: flex-end;
     margin: 1rem 0;
 }
+
+.categoryColumn {
+    margin-top: 55px;
+}

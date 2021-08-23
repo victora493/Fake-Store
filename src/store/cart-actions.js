@@ -41,7 +41,7 @@ export const getCartData = () => {
 export const storeCartData = (cart) => {
     return async dispatch => {
         try {
-            const data = await saveState(cart, 'cart')
+            await saveState(cart, 'cart')
 
             dispatch(notificationActions.showNotification({
                 type: 'success',

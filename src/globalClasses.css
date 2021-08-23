@@ -17,7 +17,7 @@
     font-size: 1.1rem;
 }
 
-.link:hover {
+.link:hover, .link.selected {
     cursor: pointer;
     text-decoration: underline !important;
 }

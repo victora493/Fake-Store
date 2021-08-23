@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { useHistory, useLocation } from 'react-router'
 import { Select } from "@chakra-ui/react"
 import { Text } from '@chakra-ui/layout'
@@ -15,7 +15,9 @@ export default function Sorting({ perPageOptions = [], sortOptions = [], default
     const [sortOption, setSortOption] = useState(defaultSort)
 
     const history = useHistory()
-    const { pathname } = useLocation()
+    const { pathname, search } = useLocation()
+
+    const queryParams = useMemo(() => new URLSearchParams(search), [search]);
 
     useEffect(() => {
         if(!hasLoaded) {
@@ -25,9 +27,12 @@ export default function Sorting({ perPageOptions = [], sortOptions = [], default
 
         if(!sortOption && !perPage) return
 
+        queryParams.set('pageSize', perPage)
+        queryParams.set('orderBy', sortOption)
+
         history.push({
             pathname: pathname,
-            search: `pageSize=${perPage}&orderBy=${sortOption}`
+            search: queryParams.toString()
         });
     }, [perPage, sortOption, history, pathname])
 
